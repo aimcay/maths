@@ -11,5 +11,13 @@ pipeline {
         sh 'go test'
       }
     }
+   stage('Deploy') {
+     agent none
+     steps {
+       script {
+         def customImage = docker.build("buggy1/maths-github:${env.BUILD_NUMBER}")
+       }
+     }
+    }
   }
 }
